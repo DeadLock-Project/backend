@@ -110,7 +110,7 @@ class Course(db.Model):
     def __repr__(self):
         return json.dumps(self.short())
 
-    def format(self):
+    def long(self):
         return {
       'id': self.id,
       'ds': self.ds,
@@ -121,3 +121,4 @@ class Course(db.Model):
       'os': self.os,
       'student_id': self.student_id
       }
+
