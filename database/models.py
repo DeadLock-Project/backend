@@ -43,7 +43,7 @@ class StudentProfile(db.Model):
     seeking_help = Column(db.Boolean)
     course = db.relationship('Course', backref="student", lazy=True)
 
-    def __init__(self, name, course, semester, status, proficient_subs, image_link,seeking_help, seeking_help_description, course):
+    def __init__(self, name, semester, status, proficient_subs, image_link,seeking_help, seeking_help_description, course):
         self.name = name
         self.course = course
         self.semester = semester
@@ -68,6 +68,21 @@ class StudentProfile(db.Model):
     def __repr__(self):
         return json.dumps(self.short())
 
+    def format(self):
+        return {
+      'id': self.id,
+      'name': self.name,
+      'course': self.course,
+      'semester': self.semester,
+      'status': self.status,
+      'image_link': self.image_link,
+      'proficient_subs': self.proficient_subs,
+      'seeking_help': self.seeking_help,
+      'seeking_help_description': self.seeking_help_description
+    }
+
+
+
 class Course(db.Model):
     __tablename__= 'course'
 
@@ -79,3 +94,30 @@ class Course(db.Model):
     systems= Column(String(), nullable= False)
     os = Column(String(), nullable= False)
     student_id = Column(Integer(), db.ForeignKey('student.id'), nullable=False)
+
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def __repr__(self):
+        return json.dumps(self.short())
+
+    def format(self):
+        return {
+      'id': self.id,
+      'ds': self.ds,
+      'dcs': self.dcs,
+      'maths': self.maths,
+      'oop': self.oop,
+      'systems': self.systems,
+      'os': self.os,
+      'student_id': self.student_id
+      }
