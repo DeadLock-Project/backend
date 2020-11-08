@@ -1,5 +1,7 @@
 # Backend for Peer2Peer App
 
+*currently under development. The API and Database servers are running over https://hackcbs-project.herokuapp.com/*
+
 ### Installing Dependencies
 
 #### Python 3.7
